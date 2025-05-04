@@ -13,3 +13,9 @@ squares.forEach((x) => {
         x.style.backgroundColor = 'red';
     });
 });
+
+button = document.querySelector(".popup");
+
+button.addEventListener("click", () => {
+    let numberOfSquares = prompt("Please enter a number of squares for your grid:")
+});
