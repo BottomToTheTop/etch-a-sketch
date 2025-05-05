@@ -19,3 +19,8 @@ h1 {
     font-family: monospace;
     font-size: 40px;
 }
+
+.popup {
+    display: block;
+    margin: 25px auto;
+}
