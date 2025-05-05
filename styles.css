@@ -20,7 +20,12 @@ h1 {
     font-size: 40px;
 }
 
-.popup {
-    display: block;
-    margin: 25px auto;
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.randomize {
+    margin-left: 10px;
 }

@@ -1,20 +1,15 @@
-button = document.querySelector(".popup");
-container = document.querySelector(".container");
+let changeGridSizeBtn = document.querySelector(".popup");
+let randomizeBtn = document.querySelector(".randomize");
+let container = document.querySelector(".container");
 
-for (let i = 1; i <= 256; i++) {
-    div = document.createElement("div");
-    container.appendChild(div);
-    div.classList.add("square");
-}
 
-let squares = document.querySelectorAll('.container > div');
-
-squares.forEach((x) => {
-    x.addEventListener("mouseenter", (e) => {
-        x.style.backgroundColor = 'red';
+function setdefaultGridColor() {
+    squares.forEach((x) => {
+        x.addEventListener("mouseenter", (e) => {
+           x.style.backgroundColor = 'red';
+        });
     });
-});
-
+}
 
 function newGrid(number) {
     for (let i = 1; i <= number*number; i++) {
@@ -24,14 +19,8 @@ function newGrid(number) {
         div.style.height = (800/number) + 'px'
         container.appendChild(div);
     }
-
     squares = document.querySelectorAll('.container > div');
-
-    squares.forEach((x) => {
-        x.addEventListener("mouseenter", (e) => {
-            x.style.backgroundColor = 'red';
-        });
-    });
+    setdefaultGridColor();
 }
 
 function removeGrid() {
@@ -45,7 +34,7 @@ function changeGridSize(numberOfSquares) {
     newGrid(numberOfSquares);
 }
 
-button.addEventListener("click", () => {
+changeGridSizeBtn.addEventListener("click", () => {
     let numberOfSquares = prompt("Please enter a number of squares for your grid (1 - 100):", 16);
     if ((numberOfSquares > 100) || (numberOfSquares < 1)) {
         alert("Please enter a number greater than 1 and less than 100.")
@@ -53,3 +42,27 @@ button.addEventListener("click", () => {
         changeGridSize(numberOfSquares); 
     }
 });
+
+function randomizeColor() {
+    squares.forEach((x) => {
+        x.addEventListener("mouseenter", () => {
+            let randomColor = String(`rgb(${Math.floor(Math.random() * 255)}, 
+            ${Math.floor(Math.random() * 255)}, 
+            ${Math.floor(Math.random() * 255)})`)
+            x.style.backgroundColor = randomColor;
+        });
+    });
+}
+
+let randomizer = false;
+randomizeBtn.addEventListener("click", () => {
+    if (randomizer === true) {
+        randomizer = false;
+        setdefaultGridColor();
+    } else if (randomizer === false) {
+        randomizer = true;
+        randomizeColor();
+    }
+});
+
+newGrid(16);
