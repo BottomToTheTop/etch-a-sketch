@@ -40,8 +40,16 @@ function removeGrid() {
     }
 }
 
-button.addEventListener("click", () => {
-    let numberOfSquares = prompt("Please enter a number of squares for your grid:")
+function changeGridSize(numberOfSquares) {
     removeGrid();
     newGrid(numberOfSquares);
+}
+
+button.addEventListener("click", () => {
+    let numberOfSquares = prompt("Please enter a number of squares for your grid (1 - 100):", 16);
+    if ((numberOfSquares > 100) || (numberOfSquares < 1)) {
+        alert("Please enter a number greater than 1 and less than 100.")
+    } else {
+        changeGridSize(numberOfSquares); 
+    }
 });
