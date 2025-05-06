@@ -1,12 +1,13 @@
 let changeGridSizeBtn = document.querySelector(".popup");
 let randomizeBtn = document.querySelector(".randomize");
 let container = document.querySelector(".container");
-
+let darkenSquaresBtn = document.querySelector(".darken-squares");
 
 function setdefaultGridColor() {
     squares.forEach((x) => {
         x.addEventListener("mouseenter", (e) => {
            x.style.backgroundColor = 'red';
+           x.style.opacity = 1;
         });
     });
 }
@@ -38,9 +39,13 @@ changeGridSizeBtn.addEventListener("click", () => {
     let numberOfSquares = prompt("Please enter a number of squares for your grid (1 - 100):", 16);
     if ((numberOfSquares > 100) || (numberOfSquares < 1)) {
         alert("Please enter a number greater than 1 and less than 100.")
-    } else {
+    } else { 
         changeGridSize(numberOfSquares); 
     }
+});
+
+darkenSquaresBtn.addEventListener("click", () => {
+    darkenSquare();
 });
 
 function randomizeColor() {
@@ -50,6 +55,7 @@ function randomizeColor() {
             ${Math.floor(Math.random() * 255)}, 
             ${Math.floor(Math.random() * 255)})`)
             x.style.backgroundColor = randomColor;
+            x.style.opacity = 1;
         });
     });
 }
@@ -59,10 +65,23 @@ randomizeBtn.addEventListener("click", () => {
     if (randomizer === true) {
         randomizer = false;
         setdefaultGridColor();
+        randomizeBtn.textContent = "Randomize Color";
     } else if (randomizer === false) {
         randomizer = true;
         randomizeColor();
+        randomizeBtn.textContent = "Back to Default";
     }
 });
+
+function darkenSquare() {
+    squares.forEach((x) => {
+        let opacity = 0;
+        x.addEventListener("mouseenter", (e) => {
+            opacity += 0.1;
+            x.style.backgroundColor = "black";
+            x.style.opacity = opacity;
+        });
+    }); 
+};
 
 newGrid(16);
